@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# Address Validator
 
-First, run the development server:
+ Next.js application for validating Australian addresses and searching locations using the Australia Post API. Features real-time logging, interactive maps, and persistent state management.
 
+ ## Features
+
+- Address validation for Australian postcodes, suburbs, and states
+- Location search with category filtering
+- Interactive maps using Leaflet and OpenStreetMap
+- Activity logging with Elasticsearch integration
+- State persistence across browser sessions
+- Modern UI with shadcn/ui components
+
+## Tech Stack
+
+- Next.js 15 with TypeScript
+- Tailwind CSS and shadcn/ui
+- Zustand for state management
+- Apollo Client and GraphQL
+- Leaflet for maps
+- Elasticsearch for logging
+
+## Setup Instructions
+
+### 1. Install Dependencies
+```bash
+npm install
+```
+### 2. Environment Configuration
+Copy the example environment file and add your credentials:
+```bash
+cp .env.example .env.local
+```
+Edit .env.local and replace the placeholder values with your actual API credentials. You can reference the .env.example file for the required variables.
+### 2. Run the Application
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
+Open http://localhost:3000 in your browser.
+## Usage
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Verifier Tab
+Enter a postcode, suburb, and state to validate the address combination.  
+Valid combinations will display a success message and show the location on the map.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Source Tab
+Search for locations within suburbs or postcodes.  
+Results can be filtered by category, and clicking on a location will display it on the map.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Logs Tab
+View all logged user interactions stored in Elasticsearch.  
+Logs can be filtered by tab type and refreshed in real-time.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## Test Cases
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Valid Examples
+- VIC, Melbourne, 3000  
+- NSW, Broadway, 2007  
+- QLD, Brisbane, 4000  
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Invalid Examples (Expected Errors)
+- **VIC, Broadway, 2007** → "The postcode 2007 does not match the suburb Broadway"  
+- **TAS, Ferntree Gully, 3156** → "The postcode 3156 does not match the suburb Ferntree Gully"  
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Available Scripts
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `npm run dev` - Start development server  
+- `npm run build` - Build for production  
+- `npm run start` - Start production server  
+- `npm run lint` - Run linting  
+- `npm run format` - Format code with Prettier  
+
+---
+
+## API Endpoints
+
+- `/api/australia-post` → Search locations  
+- `/api/graphql` → GraphQL proxy for validation  
+- `/api/log` → Store activity logs  
+- `/api/logs` → Retrieve activity logs  
+
