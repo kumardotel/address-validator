@@ -1,7 +1,7 @@
 
 # Address Validator
 
- Next.js application for validating Australian addresses and searching locations using the Australia Post API. Features real-time logging, interactive maps, and persistent state management.
+ Next.js application for validating Australian addresses and searching locations using the Australia Post API. Features activity logging, interactive maps, and persistent state management.
 
  ## Features
 
